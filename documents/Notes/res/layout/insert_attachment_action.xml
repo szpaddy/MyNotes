@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/attachment_gallery" android:text="@string/attachment_gallery" android:drawableLeft="@drawable/ic_attach_picture" style="@style/Widget.AttachmentItem" />
+    <View android:background="@color/attachment_line_color" android:layout_width="1.0px" android:layout_height="fill_parent" />
+    <TextView android:id="@id/attachment_camera" android:text="@string/attachment_camera" android:drawableLeft="@drawable/ic_attach_photo" style="@style/Widget.AttachmentItem" />
+    <View android:background="@color/attachment_line_color" android:layout_width="1.0px" android:layout_height="fill_parent" />
+    <TextView android:id="@id/attachment_contact" android:text="@string/attachment_contact" android:drawableLeft="@drawable/ic_attach_contact" style="@style/Widget.AttachmentItem" />
+</LinearLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText android:id="@id/et_foler_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@101318693" android:layout_marginRight="@101318693" android:hint="@string/hint_foler_name" android:maxLength="100" />
+</FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view android:layout_width="fill_parent" android:layout_height="@101318691" class="com.miui.notes.ui.NoteListItemCallNote"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/iv_list_icon" android:visibility="gone" android:layout_width="@dimen/list_item_time_width" android:layout_height="wrap_content" android:src="@drawable/ic_list_folder" />
+        <TextView android:textAppearance="@style/TextAppearance.List.Secondary" android:textStyle="bold" android:gravity="center_horizontal" android:id="@id/tv_time" android:layout_width="@dimen/list_item_time_width" android:layout_height="wrap_content" android:singleLine="true" />
+        <View android:background="@color/list_item_line_color" android:layout_width="1.0px" android:layout_height="fill_parent" />
+        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" android:layout_weight="1.0">
+            <TextView android:textAppearance="@style/TextAppearance.List.Primary" android:ellipsize="end" android:id="@id/tv_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:drawableLeft="@drawable/ic_call_note" android:drawablePadding="3.0dip" />
+            <com.miui.notes.view.TextViewSnippet android:textAppearance="@style/TextAppearance.List.Secondary" android:ellipsize="end" android:id="@id/tv_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+        </LinearLayout>
+        <ImageView android:id="@id/iv_alert_icon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/ic_list_alert" />
+        <ImageView android:id="@id/iv_image_icon" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:src="@drawable/ic_list_image" />
+        <CheckBox android:id="@*android:id/checkbox" android:focusable="false" android:visibility="gone" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <FrameLayout android:layout_gravity="top|right|center" android:id="@id/stick" android:background="@drawable/ic_list_stick" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="20.0dip" />
+    <View android:layout_gravity="top" android:background="@color/list_item_line_color" android:layout_width="fill_parent" android:layout_height="1.0px" />
+</view>

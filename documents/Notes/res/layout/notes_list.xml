@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view android:id="@*android:id/list" android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:listSelector="@*android:color/transparent" android:cacheColorHint="@null" android:divider="@null" notes:columnX="@dimen/list_item_time_width" notes:rowHeight="@101318695" notes:strokeWidth="1.0px" notes:strokeColor="@color/list_item_line_color" notes:scrollColor="@color/list_scroll_color" class="com.miui.notes.view.NoteListView"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:notes="http://schemas.android.com/apk/res/com.miui.notes" />

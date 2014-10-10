@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view android:layout_gravity="center_horizontal" android:background="@drawable/grid_yellow" android:paddingTop="@dimen/grid_note_image_layout_margin_top" android:layout_width="@dimen/grid_item_width" android:layout_height="@dimen/grid_item_height" android:layout_marginBottom="5.0dip" class="com.miui.notes.ui.GridNoteItem"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Grid.Primary" android:ellipsize="end" android:id="@id/note_title" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/grid_note_content_extra_margin_top" android:singleLine="true" android:drawableLeft="@drawable/ic_call_note" android:drawablePadding="3.0dip" android:layout_alignParentTop="true" android:lineSpacingMultiplier="1.0" style="@style/Widget.GridText" />
+    <FrameLayout android:id="@id/note_image_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/grid_note_content_margin_top" android:minHeight="@dimen/grid_note_content_extra_margin_top" android:layout_below="@id/note_title" android:layout_alignWithParentIfMissing="true">
+        <ImageView android:id="@id/note_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/grid_note_image_margin_left" android:layout_marginTop="@dimen/grid_note_image_margin_top" android:layout_marginBottom="@dimen/grid_note_image_margin_bottom" />
+    </FrameLayout>
+    <LinearLayout android:gravity="right|center" android:orientation="horizontal" android:id="@id/note_indicators" android:paddingRight="@dimen/grid_indicator_padding_right" android:paddingBottom="@dimen/grid_indicator_padding_bottom" android:layout_width="fill_parent" android:layout_height="@dimen/grid_indicator_layout_height" android:layout_alignParentBottom="true">
+        <include layout="@layout/note_item_indicators" />
+    </LinearLayout>
+    <TextView android:textAppearance="@style/TextAppearance.Grid.Secondary" android:id="@id/note_content" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginBottom="-8.0dip" android:maxLines="@integer/grid_note_text_max_lines" android:layout_above="@id/note_indicators" android:layout_below="@id/note_image_layout" style="@style/Widget.GridText" />
+    <FrameLayout android:id="@id/stick" android:background="@drawable/ic_grid_stick" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+</view>

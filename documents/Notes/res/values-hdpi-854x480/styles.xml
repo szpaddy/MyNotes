@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.GridText" parent="@style/Widget">
+        <item name="android:paddingLeft">@dimen/grid_note_content_padding_left</item>
+        <item name="android:paddingRight">@dimen/grid_note_content_padding_right</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+    </style>
+</resources>

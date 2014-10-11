@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/header" android:background="@drawable/edit_title_yellow" android:paddingLeft="5.0dip" android:paddingTop="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView android:id="@id/up" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/ic_header_back" />
-    <RelativeLayout android:id="@id/time_container" android:paddingRight="@dimen/notes_edit_header_padding_size" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
-        <TextView android:textAppearance="@style/TextAppearance.Title.Large" android:ellipsize="end" android:id="@id/date" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_alignParentTop="true" />
-        <TextView android:textAppearance="@style/TextAppearance.Title.Small" android:ellipsize="end" android:id="@id/time" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_below="@id/date" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/header"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_title_yellow"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="5.0dip"
+    android:paddingRight="5.0dip"
+    android:paddingTop="5.0dip" >
+
+    <ImageView
+        android:id="@id/up"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10.0dip"
+        android:paddingRight="10.0dip"
+        android:src="@drawable/ic_header_back" />
+
+    <RelativeLayout
+        android:id="@id/time_container"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:paddingRight="@dimen/notes_edit_header_padding_size" >
+
+        <TextView
+            android:id="@id/date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.Title.Large" />
+
+        <TextView
+            android:id="@id/time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.Title.Small" />
     </RelativeLayout>
-    <TextView android:textAppearance="@style/TextAppearance.Header" android:gravity="center_vertical" android:id="@id/alert" android:paddingLeft="@dimen/notes_edit_header_padding_size" android:paddingRight="@dimen/notes_edit_header_padding_size" android:layout_width="wrap_content" android:layout_height="fill_parent" android:drawableLeft="@drawable/ic_header_alert" />
-    <ImageView android:id="@id/attachment" android:paddingLeft="@dimen/notes_edit_header_padding_size" android:paddingRight="@dimen/notes_edit_header_padding_size" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/ic_header_attachment" />
-    <ImageView android:id="@id/color" android:paddingLeft="@dimen/notes_edit_header_padding_size" android:paddingRight="@dimen/notes_edit_header_padding_size" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/ic_header_color" />
+
+    <TextView
+        android:id="@id/alert"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:drawableLeft="@drawable/ic_header_alert"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/notes_edit_header_padding_size"
+        android:paddingRight="@dimen/notes_edit_header_padding_size"
+        android:textAppearance="@style/TextAppearance.Header" />
+
+    <ImageView
+        android:id="@id/attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/notes_edit_header_padding_size"
+        android:paddingRight="@dimen/notes_edit_header_padding_size"
+        android:src="@drawable/ic_header_attachment" />
+
+    <ImageView
+        android:id="@id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingLeft="@dimen/notes_edit_header_padding_size"
+        android:paddingRight="@dimen/notes_edit_header_padding_size"
+        android:src="@drawable/ic_header_color" />
+
 </LinearLayout>

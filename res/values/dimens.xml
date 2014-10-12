@@ -6,5 +6,7 @@
     <!-- title fontsize -->
     <dimen name="title_size_large">20.0sp</dimen>
     <dimen name="title_size_small">13.0sp</dimen>
+    <dimen name="single_line_height">15.0sp</dimen>
+    <dimen name="double_line_height">30.0sp</dimen>
 
 </resources>

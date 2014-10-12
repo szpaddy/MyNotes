@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<view android:paddingLeft="@dimen/screen_padding_left" android:paddingTop="@dimen/screen_padding_top" android:paddingRight="@dimen/screen_padding_right" android:paddingBottom="@dimen/screen_padding_bottom" android:layout_width="fill_parent" android:layout_height="fill_parent" android:rowCount="3" android:columnCount="2" class="com.miui.notes.view.NoteGridView"
-  xmlns:android="http://schemas.android.com/apk/res/android" />
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    class="com.miui.notes.view.NoteGridView"
+    android:columnCount="2"
+    android:paddingBottom="@dimen/screen_padding_bottom"
+    android:paddingLeft="@dimen/screen_padding_left"
+    android:paddingRight="@dimen/screen_padding_right"
+    android:paddingTop="@dimen/screen_padding_top"
+    android:rowCount="3" />

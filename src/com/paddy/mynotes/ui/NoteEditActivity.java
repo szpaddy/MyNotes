@@ -32,15 +32,16 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 
-		//updateBackground();
-		//updateTimeHeader();
+		// updateBackground();
+		// updateTimeHeader();
 	}
 
 	private void initResources() {
-		this.mHeaderUp = (ImageView) this.findViewById(R.id.headerUp);
-		this.mHeaderDate = (TextView) this.findViewById(R.id.headerDate);
-		this.mHeaderTime = (TextView) this.findViewById(R.id.headerTime);
-		this.mHeaderColor = (ImageView) this.findViewById(R.id.headerColor);
+		View header = this.getActionBar().getCustomView();
+		mHeaderUp = (ImageView) header.findViewById(R.id.headerUp);
+		mHeaderDate = (TextView) header.findViewById(R.id.headerDate);
+		mHeaderTime = (TextView) header.findViewById(R.id.headerTime);
+		mHeaderColor = (ImageView) header.findViewById(R.id.headerColor);
 		View[] headerViewAry = { mHeaderUp, mHeaderDate, mHeaderTime,
 				mHeaderColor };
 		for (View view : headerViewAry) {

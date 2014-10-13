@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.paddy.mynotes.R;
-import com.paddy.mynotes.editor.RichEditView;
 
 public class NoteEditActivity extends Activity implements OnClickListener {
 
@@ -17,7 +16,6 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	private TextView mHeaderDate;
 	private TextView mHeaderTime;
 	private ImageView mHeaderColor;
-	private RichEditView noteEditView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 			view.setOnClickListener(this);
 		}
 
-		noteEditView = (RichEditView) this.findViewById(R.id.noteEditView);
 	}
 
 	@Override

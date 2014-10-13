@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".ui.NotesListActivity" android:theme="@style/AppTheme.NotesList" android:uiOptions="splitActionBarWhenNarrow">
+        <activity android:name=".ui.NotesListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

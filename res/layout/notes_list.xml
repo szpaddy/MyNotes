@@ -1,13 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_header"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/list_content_bg" >
+    android:layout_height="fill_parent" >
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/note_list_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:background="@drawable/note_list_head_root_bg" >
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/note_list_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/note_list_header"
+        android:background="@drawable/list_content_bg" >
 
         <ListView
             android:id="@+id/noteList"
@@ -17,10 +27,20 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/note_list_foot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
+        android:background="@drawable/note_list_foot_bg"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_new_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_new_note" />
+
     </LinearLayout>
 
 </RelativeLayout>

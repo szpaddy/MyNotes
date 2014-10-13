@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.paddy.mynotes.R;
+import com.paddy.mynotes.data.Note;
+import com.paddy.mynotes.data.NotesDataManager;
 
 public class NoteEditActivity extends Activity implements OnClickListener {
 
@@ -16,12 +19,12 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	private TextView mHeaderDate;
 	private TextView mHeaderTime;
 	private ImageView mHeaderColor;
+	private EditText mNoteEditor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.note_edit);
-		this.getActionBar().setCustomView(R.layout.note_edit_header);
 
 		initResources();
 	}
@@ -34,18 +37,24 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 		// updateTimeHeader();
 	}
 
+	@Override
+	public void onBackPressed() {
+		saveNote();
+		super.onBackPressed();
+	}
+
 	private void initResources() {
-		View header = this.getActionBar().getCustomView();
-		mHeaderUp = (ImageView) header.findViewById(R.id.headerUp);
-		mHeaderDate = (TextView) header.findViewById(R.id.headerDate);
-		mHeaderTime = (TextView) header.findViewById(R.id.headerTime);
-		mHeaderColor = (ImageView) header.findViewById(R.id.headerColor);
+		mHeaderUp = (ImageView) this.findViewById(R.id.headerUp);
+		mHeaderDate = (TextView) this.findViewById(R.id.headerDate);
+		mHeaderTime = (TextView) this.findViewById(R.id.headerTime);
+		mHeaderColor = (ImageView) this.findViewById(R.id.headerColor);
 		View[] headerViewAry = { mHeaderUp, mHeaderDate, mHeaderTime,
 				mHeaderColor };
 		for (View view : headerViewAry) {
 			view.setOnClickListener(this);
 		}
 
+		mNoteEditor = (EditText) this.findViewById(R.id.noteEditorView);
 	}
 
 	@Override
@@ -65,7 +74,16 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	}
 
 	private void saveNote() {
-
+		int _id = -1;
+		int parent_id = Note.ROOT_FOLDER_ID;
+		int type = Note.TYPE_NOTE;
+		int bg_color_id = -1;
+		String content = mNoteEditor.getText().toString();
+		String created_date = "11-22-33";
+		String modified_date = "11-22-33";
+		Note note = new Note(_id, parent_id, type, bg_color_id, content,
+				created_date, modified_date);
+		NotesDataManager.getInstance(this).insertNote(note);
 	}
 
 }

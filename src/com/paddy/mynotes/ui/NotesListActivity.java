@@ -1,6 +1,8 @@
 package com.paddy.mynotes.ui;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,14 +15,22 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.paddy.mynotes.R;
+import com.paddy.mynotes.data.Note;
+import com.paddy.mynotes.data.NotesDataManager;
 
 public class NotesListActivity extends Activity implements OnItemClickListener,
 		OnItemLongClickListener, OnClickListener {
 
 	private static final String TAG = "NotesListActivity";
+	private final static int REQUEST_CODE_OPEN_NODE = 100;
+	private final static int REQUEST_CODE_NEW_NODE = 101;
+
 	private ListView mNotesListView;
 	private NotesListAdapter mNotesListAdapter;
 	private Button mAddNewNote;
+	private Context mContext;
+
+	private int mCurrentFolderId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +46,13 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	}
 
 	private void startAsyncNotesListQuery() {
-
+		new AsyncLoadNotesListTask().execute(Note.ROOT_FOLDER_ID);
 	}
 
 	private void initResources() {
+		mContext = this;
+		mCurrentFolderId = Note.ROOT_FOLDER_ID;
+
 		mNotesListView = (ListView) findViewById(R.id.noteList);
 		mNotesListView.setOnItemClickListener(this);
 		mNotesListView.setOnItemLongClickListener(this);
@@ -76,20 +89,34 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	}
 
 	private void createNewNote() {
-
+		Intent intent = new Intent(this, NoteEditActivity.class);
+		intent.setAction(Intent.ACTION_INSERT_OR_EDIT);
+		intent.putExtra(Note.INTENT_EXTRA_FOLDER_ID, mCurrentFolderId);
+		this.startActivityForResult(intent, REQUEST_CODE_NEW_NODE);
 	}
 
-	private final class AsyncLoadNotesListTask<Long, Void, Cursor> extends
-			AsyncTask<Long, Void, Cursor> {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK
+				&& (requestCode == REQUEST_CODE_OPEN_NODE || requestCode == REQUEST_CODE_NEW_NODE)) {
+			mNotesListAdapter.changeCursor(null);
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	private final class AsyncLoadNotesListTask<Params, Void, Result> extends
+			AsyncTask<Params, Void, Result> {
 
 		@Override
-		protected Cursor doInBackground(Long... params) {
-			return null;
+		protected Result doInBackground(Params... params) {
+			return (Result) NotesDataManager.getInstance(mContext)
+					.queryNoteListByFolderId((Integer) params[0]);
 		}
 
 		@Override
-		protected void onPostExecute(Cursor result) {
-			mNotesListAdapter.changeCursor((android.database.Cursor) result);
+		protected void onPostExecute(Result result) {
+			mNotesListAdapter.changeCursor((Cursor) result);
 		}
 
 	}

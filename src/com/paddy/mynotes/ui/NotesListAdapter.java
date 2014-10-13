@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 
+import com.paddy.mynotes.data.Note;
+import com.paddy.mynotes.data.NotesDataManager;
+
 public class NotesListAdapter extends CursorAdapter {
 
 	public NotesListAdapter(Context context) {
@@ -14,14 +17,16 @@ public class NotesListAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return null;
+		return new NotesListItem(context);
 	}
 
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
-		// TODO Auto-generated method stub
-
+		if (view instanceof NotesListItem) {
+			Note note = NotesDataManager.getInstance(context)
+					.getNoteFromCursor(cursor);
+			((NotesListItem) view).bind(context, note);
+		}
 	}
 
 }

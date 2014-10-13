@@ -4,17 +4,27 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBOpneHelper extends SQLiteOpenHelper {
-
+public class NotesDBHelper extends SQLiteOpenHelper {
 	private static final int VERSION = 1;
 	private static final String DB_NAME = "notes.db";
+	private static final String TABLE_NOTELIST = "notelist";
 
-	private static final String CREATE_TABLE = "create table tb_notelist("
-			+ "_id Integer primary key autoincrement, parent_id Integer, bg_color_id Integer,"
+	private static final String CREATE_TABLE = "create table "
+			+ TABLE_NOTELIST
+			+ "(_id Integer primary key autoincrement, parent_id Integer,type Integer, bg_color_id Integer,"
 			+ "content text,created_date text,modified_date text)";
 
-	public DBOpneHelper(Context context) {
+	private static NotesDBHelper instance;
+
+	public NotesDBHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
+	}
+
+	public static NotesDBHelper getInstance(Context context) {
+		if (instance == null) {
+			instance = new NotesDBHelper(context);
+		}
+		return instance;
 	}
 
 	@Override
@@ -26,5 +36,4 @@ public class DBOpneHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 	}
-
 }

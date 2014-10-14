@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class NotesDataManager extends SQLiteOpenHelper {
 	private static final String TAG = "NotesDataManager";
@@ -103,10 +104,12 @@ public class NotesDataManager extends SQLiteOpenHelper {
 	public Cursor queryNoteListByFolderId(int folderId) {
 		String selection = "parent_id=?";
 		String[] selectionArgs = { String.valueOf(folderId) };
-		String groupBy = "type";
-		String orderBy = "modified_date";
-		return this.getWritableDatabase().query(TABLE_NOTELIST,
-				COLUMNS_NOTELIST, selection, selectionArgs, groupBy, null,
-				orderBy);
+		String orderBy = "type,modified_date desc";
+		Cursor cursor = this.getWritableDatabase()
+				.query(TABLE_NOTELIST, COLUMNS_NOTELIST, selection,
+						selectionArgs, null, null, orderBy);
+		Log.d(TAG, "queryNoteListByFolderId folderId:" + folderId + " rows:"
+				+ cursor.getCount());
+		return cursor;
 	}
 }

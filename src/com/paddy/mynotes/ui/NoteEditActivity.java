@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.paddy.mynotes.R;
 import com.paddy.mynotes.data.Note;
 import com.paddy.mynotes.data.NotesDataManager;
+import com.paddy.mynotes.tool.DateUtil;
 import com.paddy.mynotes.view.NoteEditView;
 
 public class NoteEditActivity extends Activity implements OnClickListener {
@@ -82,8 +83,8 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 		int type = Note.TYPE_NOTE;
 		int bg_color_id = -1;
 		String content = mNoteEditor.getText().toString();
-		String created_date = "11-22-33";
-		String modified_date = "11-22-33";
+		String created_date = DateUtil.getCurrentDateTime();
+		String modified_date = DateUtil.getCurrentDateTime();
 		Note note = new Note(_id, parent_id, type, bg_color_id, content,
 				created_date, modified_date);
 		NotesDataManager.getInstance(this).insertNote(note);

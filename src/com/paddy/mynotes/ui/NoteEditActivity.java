@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.paddy.mynotes.R;
 import com.paddy.mynotes.data.Note;
 import com.paddy.mynotes.data.NotesDataManager;
+import com.paddy.mynotes.view.NoteEditView;
 
 public class NoteEditActivity extends Activity implements OnClickListener {
 
@@ -19,7 +19,7 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	private TextView mHeaderDate;
 	private TextView mHeaderTime;
 	private ImageView mHeaderColor;
-	private EditText mNoteEditor;
+	private NoteEditView mNoteEditor;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,7 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 
-		// updateBackground();
-		// updateTimeHeader();
+		initNoteScreen();
 	}
 
 	@Override
@@ -54,7 +53,11 @@ public class NoteEditActivity extends Activity implements OnClickListener {
 			view.setOnClickListener(this);
 		}
 
-		mNoteEditor = (EditText) this.findViewById(R.id.noteEditorView);
+		mNoteEditor = (NoteEditView) this.findViewById(R.id.noteEditorView);
+	}
+
+	private void initNoteScreen() {
+		mNoteEditor.setSelection(mNoteEditor.getText().length());
 	}
 
 	@Override

@@ -1,36 +1,31 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_header"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:id="@+id/note_list_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/note_list_head_root_bg" >
     </RelativeLayout>
 
-    <ScrollView
-        android:id="@+id/note_list_body"
+    <ListView
+        android:id="@+id/noteList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/note_list_header"
-        android:background="@drawable/list_content_bg" >
-
-        <ListView
-            android:id="@+id/noteList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
-    </ScrollView>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/list_content_bg"
+        android:cacheColorHint="@null"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" >
+    </ListView>
 
     <LinearLayout
-        android:id="@+id/note_list_foot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/note_list_foot_bg"
         android:gravity="center"
         android:orientation="horizontal" >
@@ -40,7 +35,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_new_note" />
-
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

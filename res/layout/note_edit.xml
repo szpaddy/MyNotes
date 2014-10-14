@@ -34,14 +34,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.Title.Large" />
+                android:textAppearance="@style/TextAppearanceMedium" />
 
             <TextView
                 android:id="@+id/headerTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.Title.Small" />
+                android:textAppearance="@style/TextAppearanceNormal" />
         </LinearLayout>
 
         <ImageView
@@ -51,29 +51,25 @@
             android:src="@drawable/header_color" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/note_header"
-        android:orientation="vertical" >
+        android:background="@drawable/edit_yellow"
+        android:fillViewport="false" >
 
-        <ScrollView
+        <com.paddy.mynotes.view.NoteEditView
+            android:id="@+id/noteEditorView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_title_yellow" >
-
-            <EditText
-                android:id="@+id/noteEditorView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10" />
-        </ScrollView>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/edit_bottom_cover" />
+            android:autoLink="all"
+            android:background="@null"
+            android:gravity="top|left"
+            android:lineSpacingMultiplier="1.2"
+            android:linksClickable="false"
+            android:minLines="15"
+            android:padding="12dp"
+            android:textAppearance="@style/TextAppearanceNoteEdit" />
+    </ScrollView>
 
 </RelativeLayout>

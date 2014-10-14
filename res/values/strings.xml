@@ -6,5 +6,6 @@
     <string name="menu_create_folder">新建文件夹</string>
     <string name="menu_setting">设置</string>
     <string name="create_new_note">新建标签</string>
+    <string name="hint_search_notes">搜索便签</string>
 
 </resources>

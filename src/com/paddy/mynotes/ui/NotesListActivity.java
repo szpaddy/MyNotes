@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.paddy.mynotes.R;
@@ -31,6 +33,7 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	private Context mContext;
 
 	private int mCurrentFolderId;
+	private View mSearchView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,14 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		mContext = this;
 		mCurrentFolderId = Note.ROOT_FOLDER_ID;
 
+		FrameLayout searchBarLayout = new FrameLayout(this);
+		searchBarLayout.setBackgroundResource(R.drawable.search_bar_bg);
+		this.mSearchView = LayoutInflater.from(this).inflate(
+				R.layout.note_list_search, searchBarLayout, false);
+		searchBarLayout.addView(this.mSearchView);
+
 		mNotesListView = (ListView) findViewById(R.id.noteList);
+		mNotesListView.addHeaderView(searchBarLayout, null, false);
 		mNotesListView.setOnItemClickListener(this);
 		mNotesListView.setOnItemLongClickListener(this);
 		mNotesListAdapter = new NotesListAdapter(this);

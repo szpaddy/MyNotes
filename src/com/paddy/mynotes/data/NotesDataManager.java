@@ -4,18 +4,25 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-public class NotesDataManager {
+public class NotesDataManager extends SQLiteOpenHelper {
+	private static final String TAG = "NotesDataManager";
+
+	private static final int VERSION = 1;
+	private static final String DB_NAME = "notes.db";
 	private static final String TABLE_NOTELIST = "notelist";
+	public static final String SQL_CREATE_TABLE_NOTELIST = "create table "
+			+ TABLE_NOTELIST
+			+ "(_id Integer primary key autoincrement, parent_id Integer,type Integer, bg_color_id Integer,"
+			+ "content text,created_date text,modified_date text)";
 	private static final String[] COLUMNS_NOTELIST = { "_id", "parent_id",
 			"type", "bg_color_id", "content", "created_date", "modified_date" };
 
 	private static NotesDataManager mNotesDataManager;
-	private NotesDBHelper mHelper;
 
 	public NotesDataManager(Context context) {
-		mHelper = NotesDBHelper.getInstance(context);
-		mHelper.getWritableDatabase();
+		super(context, DB_NAME, null, VERSION);
 	}
 
 	public static NotesDataManager getInstance(Context context) {
@@ -23,6 +30,16 @@ public class NotesDataManager {
 			mNotesDataManager = new NotesDataManager(context);
 		}
 		return mNotesDataManager;
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(SQL_CREATE_TABLE_NOTELIST);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
 	}
 
 	public long insertNote(Note note) {
@@ -33,14 +50,14 @@ public class NotesDataManager {
 		cv.put("content", note.getContent());
 		cv.put("created_date", note.getCreated_date());
 		cv.put("modified_date", note.getModified_date());
-		return mHelper.getWritableDatabase().insert(TABLE_NOTELIST, null, cv);
+		return this.getWritableDatabase().insert(TABLE_NOTELIST, null, cv);
 	}
 
 	public long deleteNote(Note note) {
 		String whereClause = "_id=?";
 		String[] whereArgs = { String.valueOf(note.get_id()) };
-		return mHelper.getWritableDatabase().delete(TABLE_NOTELIST,
-				whereClause, whereArgs);// 执行删除
+		return this.getWritableDatabase().delete(TABLE_NOTELIST, whereClause,
+				whereArgs);// 执行删除
 	}
 
 	public long updateNote(Note note) {
@@ -53,14 +70,14 @@ public class NotesDataManager {
 		cv.put("modified_date", note.getModified_date());
 		String whereClause = "_id=?";
 		String[] whereArgs = { String.valueOf(note.get_id()) };
-		return mHelper.getWritableDatabase().update(TABLE_NOTELIST, cv,
+		return this.getWritableDatabase().update(TABLE_NOTELIST, cv,
 				whereClause, whereArgs);
 	}
 
 	public Note queryNoteById(long noteId) {
 		String selection = "_id=?";
 		String[] selectionArgs = { String.valueOf(noteId) };
-		Cursor cursor = mHelper.getWritableDatabase().query(TABLE_NOTELIST,
+		Cursor cursor = this.getWritableDatabase().query(TABLE_NOTELIST,
 				COLUMNS_NOTELIST, selection, selectionArgs, null, null, null);
 		Note note = null;
 		if (cursor.moveToFirst()) {
@@ -88,7 +105,7 @@ public class NotesDataManager {
 		String[] selectionArgs = { String.valueOf(folderId) };
 		String groupBy = "type";
 		String orderBy = "modified_date";
-		return mHelper.getWritableDatabase().query(TABLE_NOTELIST,
+		return this.getWritableDatabase().query(TABLE_NOTELIST,
 				COLUMNS_NOTELIST, selection, selectionArgs, groupBy, null,
 				orderBy);
 	}

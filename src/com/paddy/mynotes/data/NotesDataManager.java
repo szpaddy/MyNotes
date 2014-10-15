@@ -112,4 +112,8 @@ public class NotesDataManager extends SQLiteOpenHelper {
 				+ cursor.getCount());
 		return cursor;
 	}
+
+	public boolean isFolderNameExist(String folderName) {
+		return false;
+	}
 }

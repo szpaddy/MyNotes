@@ -4,11 +4,11 @@
     android:layout_height="wrap_content" >
 
     <EditText
-        android:id="@id/et_foler_name"
+        android:id="@+id/et_folder_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@101318693"
-        android:layout_marginRight="@101318693"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:hint="@string/hint_foler_name"
         android:maxLength="100" />
 

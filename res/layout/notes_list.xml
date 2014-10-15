@@ -10,18 +10,35 @@
         android:background="@drawable/note_list_head_root_bg" >
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/noteList"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/list_content_bg"
-        android:cacheColorHint="@null"
-        android:divider="@null"
-        android:fadingEdge="none"
-        android:listSelector="@android:color/transparent"
-        android:scrollbars="none" >
-    </ListView>
+        android:background="@drawable/list_content_border" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/list_title_bar_shadow" />
+
+            <ListView
+                android:id="@+id/noteList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/yellow"
+                android:cacheColorHint="@null"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none" >
+            </ListView>
+        </LinearLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,9 +48,19 @@
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/btn_new_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_new_folder" />
+
+        <Button
             android:id="@+id/btn_new_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/icon_new_note" />
     </LinearLayout>
 

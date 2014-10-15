@@ -16,7 +16,7 @@ public class NotesDataManager extends SQLiteOpenHelper {
 	public static final String SQL_CREATE_TABLE_NOTELIST = "create table "
 			+ TABLE_NOTELIST
 			+ "(_id Integer primary key autoincrement, parent_id Integer,type Integer, bg_color_id Integer,"
-			+ "content text,created_date text,modified_date text)";
+			+ "content text,created_date Integer,modified_date Integer)";
 	private static final String[] COLUMNS_NOTELIST = { "_id", "parent_id",
 			"type", "bg_color_id", "content", "created_date", "modified_date" };
 
@@ -75,7 +75,7 @@ public class NotesDataManager extends SQLiteOpenHelper {
 				whereClause, whereArgs);
 	}
 
-	public Note queryNoteById(long noteId) {
+	public Note queryNoteById(int noteId) {
 		String selection = "_id=?";
 		String[] selectionArgs = { String.valueOf(noteId) };
 		Cursor cursor = this.getWritableDatabase().query(TABLE_NOTELIST,
@@ -93,9 +93,9 @@ public class NotesDataManager extends SQLiteOpenHelper {
 		int type = cursor.getInt(cursor.getColumnIndex("type"));
 		int bg_color_id = cursor.getInt(cursor.getColumnIndex("bg_color_id"));
 		String content = cursor.getString(cursor.getColumnIndex("content"));
-		String created_date = cursor.getString(cursor
+		long created_date = cursor.getLong(cursor
 				.getColumnIndex("created_date"));
-		String modified_date = cursor.getString(cursor
+		long modified_date = cursor.getLong(cursor
 				.getColumnIndex("modified_date"));
 		return new Note(_id, parent_id, type, bg_color_id, content,
 				created_date, modified_date);

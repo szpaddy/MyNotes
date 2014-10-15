@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.paddy.mynotes.R;
 import com.paddy.mynotes.data.Note;
 import com.paddy.mynotes.data.NotesDataManager;
+import com.paddy.mynotes.view.NotesListItemView;
 
 public class NotesListActivity extends Activity implements OnItemClickListener,
 		OnItemLongClickListener, OnClickListener {
@@ -26,6 +27,10 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	private static final String TAG = "NotesListActivity";
 	private final static int REQUEST_CODE_OPEN_NODE = 100;
 	private final static int REQUEST_CODE_NEW_NODE = 101;
+
+	private enum ListEditState {
+		NOTE_LIST, SUB_FOLDER
+	};
 
 	private ListView mNotesListView;
 	private NotesListAdapter mNotesListAdapter;
@@ -57,7 +62,7 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		mCurrentFolderId = Note.ROOT_FOLDER_ID;
 
 		FrameLayout searchBarLayout = new FrameLayout(this);
-		searchBarLayout.setBackgroundResource(R.drawable.search_bar_bg);
+		//searchBarLayout.setBackgroundResource(R.drawable.search_bar_bg);
 		this.mSearchView = LayoutInflater.from(this).inflate(
 				R.layout.note_list_search, searchBarLayout, false);
 		searchBarLayout.addView(this.mSearchView);
@@ -76,15 +81,20 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// TODO Auto-generated method stub
-
+		if (view instanceof NotesListItemView) {
+			Note note = ((NotesListItemView) view).getItemData();
+			if (note.getType() == Note.TYPE_FOLDER) {
+				openFolder(note);
+			} else {
+				openNode(note);
+			}
+		}
 	}
 
 	@Override
@@ -103,6 +113,17 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		intent.setAction(Intent.ACTION_INSERT_OR_EDIT);
 		intent.putExtra(Note.INTENT_EXTRA_FOLDER_ID, mCurrentFolderId);
 		this.startActivityForResult(intent, REQUEST_CODE_NEW_NODE);
+	}
+
+	private void openNode(Note note) {
+		Intent intent = new Intent(this, NoteEditActivity.class);
+		intent.setAction(Intent.ACTION_VIEW);
+		intent.putExtra(Intent.EXTRA_UID, note.get_id());
+		this.startActivityForResult(intent, REQUEST_CODE_OPEN_NODE);
+	}
+	
+	private void openFolder(Note note) {
+		
 	}
 
 	@Override

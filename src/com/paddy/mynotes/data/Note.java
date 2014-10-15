@@ -13,11 +13,11 @@ public class Note {
 	private int type;
 	private int bg_color_id;
 	private String content;
-	private String created_date;
-	private String modified_date;
+	private long created_date;
+	private long modified_date;
 
 	public Note(int _id, int parent_id, int type, int bg_color_id,
-			String content, String created_date, String modified_date) {
+			String content, long created_date, long modified_date) {
 		this._id = _id;
 		this.parent_id = parent_id;
 		this.type = type;
@@ -67,19 +67,19 @@ public class Note {
 		this.content = content;
 	}
 
-	public String getCreated_date() {
+	public long getCreated_date() {
 		return created_date;
 	}
 
-	public void setCreated_date(String created_date) {
+	public void setCreated_date(long created_date) {
 		this.created_date = created_date;
 	}
 
-	public String getModified_date() {
+	public long getModified_date() {
 		return modified_date;
 	}
 
-	public void setModified_date(String modified_date) {
+	public void setModified_date(long modified_date) {
 		this.modified_date = modified_date;
 	}
 

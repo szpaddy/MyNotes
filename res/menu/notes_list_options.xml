@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/stick"
+        android:id="@id/stick"
         android:icon="@drawable/ic_menu_stick"
         android:showAsAction="always|withText"
         android:title="@string/menu_stick"/>
     <item
-        android:id="@+id/move"
+        android:id="@id/move"
         android:icon="@100795015"
         android:showAsAction="always|withText"
         android:title="@string/menu_move"/>
     <item
-        android:id="@+id/delete"
+        android:id="@id/delete"
         android:icon="@100794701"
         android:showAsAction="always|withText"
         android:title="@string/menu_delete"/>

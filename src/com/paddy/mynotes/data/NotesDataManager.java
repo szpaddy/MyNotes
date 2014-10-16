@@ -104,7 +104,7 @@ public class NotesDataManager extends SQLiteOpenHelper {
 	public Cursor queryNoteListByFolderId(int folderId) {
 		String selection = "parent_id=?";
 		String[] selectionArgs = { String.valueOf(folderId) };
-		String orderBy = "type,modified_date desc";
+		String orderBy = "type desc, modified_date desc";
 		Cursor cursor = this.getWritableDatabase()
 				.query(TABLE_NOTELIST, COLUMNS_NOTELIST, selection,
 						selectionArgs, null, null, orderBy);
@@ -113,7 +113,18 @@ public class NotesDataManager extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	public boolean isFolderNameExist(String folderName) {
-		return false;
+	public boolean isFolderNameExist(int parentFolderId, String folderName) {
+		String[] columns = { "count(*)" };
+		String selection = "type=1 and parent_id=? and content=?";
+		String[] selectionArgs = { String.valueOf(parentFolderId),
+				folderName.trim() };
+		Cursor cursor = this.getWritableDatabase().query(TABLE_NOTELIST,
+				columns, selection, selectionArgs, null, null, null);
+		boolean isExist = false;
+		if (cursor.moveToFirst()) {
+			isExist = (cursor.getInt(0) > 0);
+		}
+		return isExist;
+
 	}
 }

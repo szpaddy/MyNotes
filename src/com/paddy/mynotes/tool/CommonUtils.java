@@ -9,16 +9,12 @@ public class CommonUtils {
 	public static void showSoftInput(View view) {
 		InputMethodManager inputMethodManager = (InputMethodManager) view
 				.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-		if (inputMethodManager != null)
-			inputMethodManager.showSoftInput(view,
-					InputMethodManager.RESULT_SHOWN);
+		inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 
 	public static void hideSoftInput(View view) {
 		InputMethodManager inputMethodManager = (InputMethodManager) view
 				.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-		if (inputMethodManager != null)
-			inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),
-					inputMethodManager.HIDE_NOT_ALWAYS);
+		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 }

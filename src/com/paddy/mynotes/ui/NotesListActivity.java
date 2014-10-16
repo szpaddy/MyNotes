@@ -11,9 +11,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -45,6 +49,7 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	private int mCurrentFolderId;
 	private View mSearchView;
 	private AlertDialog mActiveDialog;
+	private MultiChoiceModeCallback mModeCallBack;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +91,17 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
 			int position, long id) {
-		return false;
+		if (view instanceof NotesListItemView) {
+			Note note = ((NotesListItemView) view).getItemData();
+			if (note.getType() == Note.TYPE_FOLDER) {
+				openFolder(note);
+			} else {
+
+			}
+
+			startActionMode(this.mModeCallBack);
+		}
+		return true;
 	}
 
 	@Override
@@ -178,7 +193,6 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		}
 
 		protected void initialize() {
-			this.nPositiveButton = getButton(BUTTON_POSITIVE);
 			View folderEditView = LayoutInflater.from(this.nContext).inflate(
 					R.layout.foldername_edit, null);
 			this.nFolderEditor = ((EditText) folderEditView
@@ -208,14 +222,7 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 			setView(folderEditView);
 			setButton(BUTTON_POSITIVE,
 					this.nContext.getString(R.string.confirm_ok),
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							saveFolderName();
-						}
-
-					});
+					(DialogInterface.OnClickListener) null);
 			setButton(BUTTON_NEGATIVE,
 					this.nContext.getString(R.string.confirm_cancel),
 					(DialogInterface.OnClickListener) null);
@@ -230,12 +237,18 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		public void show() {
 			super.show();
 
-			this.nFolderEditor.requestFocus();
-			this.nFolderEditor.post(new Runnable() {
-				public void run() {
-					CommonUtils.showSoftInput(nFolderEditor);
+			this.nPositiveButton = getButton(BUTTON_POSITIVE);
+			this.nPositiveButton.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					saveFolderName();
 				}
+
 			});
+
+			CommonUtils.showSoftInput(nFolderEditor);
+			this.nFolderEditor.requestFocus();
 		}
 
 		public void dismiss() {
@@ -246,27 +259,63 @@ public class NotesListActivity extends Activity implements OnItemClickListener,
 		protected void saveFolderName() {
 			nFolderName = this.nFolderEditor.getText().toString().trim();
 			if (NotesDataManager.getInstance(this.nContext).isFolderNameExist(
-					nFolderName)) {
+					mCurrentFolderId, nFolderName)) {
 				Toast.makeText(
 						this.nContext,
 						this.nContext.getString(R.string.rename_folder_message),
 						Toast.LENGTH_LONG).show();
 				this.nFolderEditor.setSelection(0, this.nFolderEditor.length());
-				return;
-			}
-			int _id = -1;
-			int parent_id = mCurrentFolderId;
-			int type = Note.TYPE_FOLDER;
-			int bg_color_id = ResourceParser.getDefaultBgId(this.nContext);
-			String content = this.nFolderName;
-			long created_date = System.currentTimeMillis();
-			long modified_date = System.currentTimeMillis();
+			} else {
+				int _id = -1;
+				int parent_id = mCurrentFolderId;
+				int type = Note.TYPE_FOLDER;
+				int bg_color_id = ResourceParser.getDefaultBgId(this.nContext);
+				String content = this.nFolderName;
+				long created_date = System.currentTimeMillis();
+				long modified_date = System.currentTimeMillis();
 
-			Note folder = new Note(_id, parent_id, type, bg_color_id, content,
-					created_date, modified_date);
-			NotesDataManager.getInstance(this.nContext).insertNote(folder);
-			dismiss();
+				Note folder = new Note(_id, parent_id, type, bg_color_id,
+						content, created_date, modified_date);
+				NotesDataManager.getInstance(this.nContext).insertNote(folder);
+				startAsyncNotesListQuery();
+
+				dismiss();
+			}
 		}
 	}
 
+	private class MultiChoiceModeCallback implements MultiChoiceModeListener {
+
+		@Override
+		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode mode) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void onItemCheckedStateChanged(ActionMode mode, int position,
+				long id, boolean checked) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
 }
